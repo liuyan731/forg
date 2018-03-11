@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<title>JavaScript学习</title>
+	<script>
+		var globalVar = "hello world";
+
+		function displayDate(){
+			document.getElementById("demo").innerHTML=Date();
+		}
+
+		function changeImg(){
+			element = document.getElementById("changeImg");
+			x = document.getElementById("info1");
+			if (element.src.match("bulbon")) {
+				element.src = "../pic/pic_bulboff.gif";
+				x.style.color="red"
+			} else {
+				element.src = "../pic/pic_bulbon.gif";
+				x.style.color="black"
+			}
+		}
+
+		function check() {
+			x = document.getElementById("input1").value;
+			p = document.getElementById("msg");
+			if (isNaN(x) || x == "") {
+				p.innerHTML = "输入非法！";
+				p.style.color = "red";
+			} else {
+				p.innerHTML = "输入合法！";
+				p.style.color = "green";
+			}
+		}
+
+		function showPersonInfo() {
+			var person = {
+			    firstName:"John",
+			    lastName:"Doe",
+			    age:50,
+			    eyeColor:"blue",
+
+			    fullName: function() {
+			    	return this.firstName + " " + this["lastName"];
+			    }
+			};
+
+			person.toString = function() {
+				return "firstName: " + this.firstName + ", lastName: " + this["lastName"] + ", age: " + this.age + ", eyeColor: " + this.eyeColor;
+			}
+
+			document.getElementById("showPersonInfo").innerHTML = (person.fullName() + ": " + person.toString());
+		}
+
+		function calc() {
+			num1 = document.getElementById("num1").value;
+			num2 = document.getElementById("num2").value;
+			p = document.getElementById("calcMsg");
+			if (num1 == '' || num2 == '' || isNaN(num1) || isNaN(num2)) {
+				p.innerHTML = "数值错误！";
+				p.style.color = "red";
+			} else {
+				p.innerHTML = num2 * num1;
+				p.style.color = "green";
+			}
+			globalVar = "hello world2222";
+			globalVar2 = "hello world1111"
+		}
+
+		var isCheck = false;
+		function allCheck() {
+			isCheck = !isCheck;
+			checkboxs = document.getElementsByName("checkbox1");
+			for (var i = 0; i < checkboxs.length; i++) {
+				checkboxs[i].checked = isCheck;
+			}
+		}
+
+		function testEvent1() {
+			var a = document.getElementById("testEvent1").value;
+			document.getElementById("testEventMsg1").innerHTML = a;
+		}
+	</script>
+	</head>
+	<body>
+
+		<script>
+			document.write("<h1>我的第一个 JavaScript 程序</h1>");
+			document.write("<h3>只能在 HTML 输出中使用 document.write。如果您在文档加载后使用该方法，会覆盖整个文档。</h3>");
+		</script>
+
+		<p id="pos">定位点</p>
+
+		<button type="button" onclick="alert('onclick事件')">button onclick事件</button>
+	
+		<p id="demo">这是一个段落</p>
+
+		<button type="button" onclick="displayDate()">显示日期</button>
+		
+		<p>
+			<img id="changeImg" onclick="changeImg()" src="../pic/pic_bulbon.gif"></img>
+			<p id="info1">点击灯泡就可以打开或关闭这盏灯并改变这段文字的颜色</p>
+		</p>
+
+		<p>
+			输入数字校验：<input id="input1" type="text" name="input1"/>
+			<button id="check" onclick="check()">校验</button>
+			<font id="msg"></font>
+		</p>
+		<script>
+			a = 3;
+			b = 4;
+			console.log(a + b)
+		</script>
+
+		<p id="showPersonInfo"></p>
+		<button type="button" onclick="showPersonInfo()">显示对象信息</button>
+
+		<p>
+			输入两个数字计算乘积：
+			<input type="text" id="num1"/> * <input type="text" id="num2"/> 
+			<button type="button" onclick="calc()">计算</button>
+			<font id="calcMsg"></font>
+		</p>
+
+		<p>
+			<button type="button" onclick="allCheck()">选择框全选/取消全选</button><br>
+			<input type="checkbox" name="checkbox1" value="1"> 第一个 <br/>
+			<input type="checkbox" name="checkbox1" value="2"> 第二个 <br/>
+			<input type="checkbox" name="checkbox1" value="3"> 第三个 <br/>
+		</p>
+
+		<p>
+			输入信息然后展示：<input type="text" id="testEvent1" onchange="testEvent1()" />
+			<font id="testEventMsg1"></font>
+		</p>
+
+		<p>
+			<button type="button" onclick="this.innerHTML='变了'">按钮</button>
+		</p>
+
+		<script>
+			"use strict";
+			var aa = 123;
+			function foo() {
+				alert("okkk!")
+			}
+		</script>
+
+		<form action="###" onsubmit="return formValidate()" name="form1">
+			name: <input type="text" name="formName" />	
+			passwd: <input type="text" name="formPwd" required="required" />
+			<input type="submit" value="submit">
+		</form>
+		<script>
+			function formValidate() {
+				var x = document.forms["form1"]["formName"].value;
+				if (x == null || x == '') {
+					alert("asd");
+					return false;
+				}
+				return true;
+			}
+		</script>
+
+		<p>
+			请输入100～500之间的数字：<input type="number" id="inputText" min="100" max="500"/>
+			<input type="button" value="okkk" onclick="formValidate2()"/>
+			<p id="msg2"></p>
+			<script>
+				function formValidate2() {
+					var inputObj = document.getElementById("inputText");
+					if (inputObj.checkValidity() == false) {
+						document.getElementById("msg2").innerHTML = inputObj.validationMessage;
+						document.getElementById("msg2").style.color = "red";
+					} else {
+						document.getElementById("msg2").innerHTML = "OK";
+						document.getElementById("msg2").style.color = "green";
+					}
+				}
+			</script>
+		</p>
+
+		<p>
+			<a href="#pos">跳到定位点</a> <br/>
+
+			<a href="javascript:void(0);">点击无任何动作</a>
+		</p>
+	</body>
+</html>
